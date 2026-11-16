@@ -12,11 +12,18 @@
   if (hero) {
     const slides = $$(".slide", hero);
     let cur = 0, timer;
+    // Görseller sırası gelince yüklenir (data-bg -> background-image)
+    const loadBg = s => {
+      if (s && s.dataset.bg) { s.style.backgroundImage = `url('${s.dataset.bg}')`; s.removeAttribute("data-bg"); }
+    };
     const go = i => {
       slides[cur].classList.remove("active");
       cur = (i + slides.length) % slides.length;
+      loadBg(slides[cur]);
+      loadBg(slides[(cur + 1) % slides.length]); // bir sonrakini önceden hazırla
       slides[cur].classList.add("active");
     };
+    addEventListener("load", () => setTimeout(() => loadBg(slides[1]), 1500));
     const restart = () => { clearInterval(timer); timer = setInterval(() => go(cur + 1), 7000); };
     $(".prev", hero).addEventListener("click", () => { go(cur - 1); restart(); });
     $(".next", hero).addEventListener("click", () => { go(cur + 1); restart(); });
