@@ -296,13 +296,21 @@ h1, h2, h3, h4, .btn, .nav-list > li > a, .sub-menu a, .lang a, .slide-title, .s
 }
 @media (max-width: 767px) {
   .logo img { width: 150px; }
-  /* Mobil: görsel tam genişlikte, başlık ve buton görselin altında */
-  .hero { aspect-ratio: auto; height: calc(100px + 56.25vw + 170px); }
-  .slide { background-size: 100% auto; background-position: center 100px; }
-  .slide-inner { left: 20px; right: 20px; top: auto; bottom: 28px; transform: none; padding-top: 0; gap: 16px; }
-  .slide-title, .slide-title.small { font-size: 24px; }
-  .slide .btn { font-size: 10px; padding: 10px 20px; white-space: normal; }
-  .hero-arrows { right: 12px; top: calc(100px + 56.25vw - 58px); bottom: auto; transform: none; flex-direction: row; }
+  /* Mobil: görsel tam genişlikte (kesilmez); başlık ve buton görselin üstünde,
+     arkasında soldan sağa silinen yarı saydam degrade (orijinal sitedeki gibi) */
+  .hero { aspect-ratio: auto; height: calc(100px + 56.25vw); min-height: 300px; }
+  .slide { background-size: 100% auto; background-position: center bottom; }
+  .slide::before {
+    content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 72%; pointer-events: none;
+    background: linear-gradient(90deg, rgba(6,22,49,.78) 0%, rgba(6,22,49,.62) 55%, rgba(6,22,49,0) 100%);
+  }
+  .slide-inner {
+    left: 20px; right: 30%; top: 100px; bottom: 0; transform: none; padding: 0;
+    justify-content: center; gap: 14px; z-index: 1;
+  }
+  .slide-title, .slide-title.small { font-size: 22px; text-shadow: 0 2px 10px rgba(0,0,0,.45); }
+  .slide .btn { font-size: 9px; padding: 9px 16px; white-space: normal; }
+  .hero-arrows { right: 12px; top: auto; bottom: 12px; transform: none; flex-direction: row; z-index: 2; }
   .hero-arrow { width: 44px; height: 44px; }
   .products { padding: 70px 0 40px; }
   .product-grid { grid-template-columns: 1fr; }
