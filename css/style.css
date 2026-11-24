@@ -324,7 +324,7 @@ h1, h2, h3, h4, .btn, .nav-list > li > a, .sub-menu a, .lang a, .slide-title, .s
 /* ---------- Sayfa başlık alanı ---------- */
 .title-bar {
   position: relative; height: 595px;
-  background: #0b2945 url("../assets/images/titlebar-bg.webp") center / cover no-repeat;
+  background: #0b2945 url("../assets/images/titlebar-bg.webp?v=20261124") center / cover no-repeat;
   display: flex; align-items: center;
 }
 .title-bar .container { padding-top: 120px; }
