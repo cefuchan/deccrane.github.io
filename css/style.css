@@ -65,6 +65,7 @@ h1, h2, h3, h4, .btn, .nav-list > li > a, .sub-menu a, .lang a, .slide-title, .s
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 
 .container { width: 100%; max-width: 1440px; margin: 0 auto; padding: 0 12px; }
+@media (min-width: 1200px) { .container { max-width: 1840px; padding: 0 40px; } }
 .section-title { text-align: center; font-size: 34px; font-weight: 700; color: var(--ink); margin-bottom: 24px; }
 
 /* ---------- Butonlar (hap şeklinde) ---------- */
@@ -463,3 +464,28 @@ h1, h2, h3, h4, .btn, .nav-list > li > a, .sub-menu a, .lang a, .slide-title, .s
   .form-grid { grid-template-columns: 1fr; }
   .map iframe { height: 350px; }
 }
+
+/* =========================================================
+   BÜYÜK EKRANLAR + MENÜ OKUNURLUĞU
+   ========================================================= */
+/* Masaüstü menü: görselin üstünde daha belirgin */
+@media (min-width: 1200px) {
+  .site-header { background: linear-gradient(180deg, rgba(4,14,32,.78) 0%, rgba(4,14,32,.55) 65%, rgba(4,14,32,0) 100%); }
+  .nav-list > li > a { font-size: 14px; font-weight: 800; letter-spacing: 1.2px; text-shadow: 0 1px 8px rgba(0,0,0,.55); }
+  .info-item, .lang a { text-shadow: 0 1px 6px rgba(0,0,0,.45); }
+  .title-bar h1 { text-shadow: 0 2px 18px rgba(0,0,0,.35); }
+}
+/* 1920px üstü: site ekran genişliğiyle orantılı büyür (2K ≈ 1.33x, 4K = 2x) */
+@media (min-width: 2080px) { html { zoom: 1.083; } }
+@media (min-width: 2240px) { html { zoom: 1.167; } }
+@media (min-width: 2400px) { html { zoom: 1.250; } }
+@media (min-width: 2560px) { html { zoom: 1.333; } }
+@media (min-width: 2720px) { html { zoom: 1.417; } }
+@media (min-width: 2880px) { html { zoom: 1.500; } }
+@media (min-width: 3040px) { html { zoom: 1.583; } }
+@media (min-width: 3200px) { html { zoom: 1.667; } }
+@media (min-width: 3360px) { html { zoom: 1.750; } }
+@media (min-width: 3520px) { html { zoom: 1.833; } }
+@media (min-width: 3680px) { html { zoom: 1.917; } }
+@media (min-width: 3840px) { html { zoom: 2.000; } }
+@media (min-width: 4000px) { html { zoom: 2.083; } }
