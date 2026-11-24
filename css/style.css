@@ -138,10 +138,11 @@ h1, h2, h3, h4, .btn, .nav-list > li > a, .sub-menu a, .lang a, .slide-title, .s
 .nav-overlay.show { opacity: 1; visibility: visible; }
 
 /* ---------- Hero slider ---------- */
-.hero { position: relative; height: 795px; overflow: hidden; background: #2b3440; }
+/* Slider görselleri 16:9; yükseklik genişliğe göre ayarlanır, görsel kesilmez */
+.hero { position: relative; width: 100%; aspect-ratio: 16 / 9; max-height: 100vh; min-height: 560px; overflow: hidden; background: #061631; }
 .slide {
   position: absolute; inset: 0;
-  background: #2b3440 center / cover no-repeat; /* görsel, HTML'deki inline background-image ile gelir */
+  background: #061631 center / cover no-repeat; /* görsel, HTML'deki inline background-image ile gelir */
   opacity: 0; visibility: hidden; transition: opacity 1s ease, visibility 1s;
 }
 .slide.active { opacity: 1; visibility: visible; z-index: 1; }
@@ -171,9 +172,9 @@ h1, h2, h3, h4, .btn, .nav-list > li > a, .sub-menu a, .lang a, .slide-title, .s
 .products { padding: 130px 0 100px; }
 .product-grid { display: grid; grid-template-columns: repeat(2, 1fr); row-gap: 0; }
 .product-card { padding: 0 14.4px; }
-.product-card .thumb { display: block; overflow: hidden; }
-.product-card .thumb img { width: 100%; aspect-ratio: 690 / 388; object-fit: cover; transition: transform .8s var(--ease); }
-.product-card:hover .thumb img { transform: scale(1.05); }
+.product-card .thumb { display: block; overflow: hidden; background: #5a5a5a; }
+.product-card .thumb img { width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: contain; transition: filter .5s var(--ease); }
+.product-card:hover .thumb img { filter: brightness(1.08); }
 .product-card .content { min-height: 200px; padding-top: 38px; }
 .product-card h3 { font-size: 28px; font-weight: 700; margin-bottom: 20px; }
 .product-card h3 a { color: var(--navy); }
@@ -284,8 +285,10 @@ h1, h2, h3, h4, .btn, .nav-list > li > a, .sub-menu a, .lang a, .slide-title, .s
   }
   .mobile-extra .lang a { font-size: 16px; }
 
-  .hero { height: 620px; }
+  .hero { min-height: 0; max-height: none; }
+  .slide { background-size: contain; background-position: center bottom; }
   .slide-inner { top: 50%; transform: translateY(-50%); padding-top: 100px; gap: 40px; }
+  .slide-title { font-size: 38px; }
   .hero-arrows { margin-top: 0; }
   .hero-arrow { width: 50px; height: 50px; }
   .footer-main { grid-template-columns: 1fr 1fr; }
@@ -293,11 +296,14 @@ h1, h2, h3, h4, .btn, .nav-list > li > a, .sub-menu a, .lang a, .slide-title, .s
 }
 @media (max-width: 767px) {
   .logo img { width: 150px; }
-  .hero { height: 488px; }
-  .slide-inner { left: 20px; right: 20px; }
+  /* Mobil: görsel tam genişlikte, başlık ve buton görselin altında */
+  .hero { aspect-ratio: auto; height: calc(100px + 56.25vw + 170px); }
+  .slide { background-size: 100% auto; background-position: center 100px; }
+  .slide-inner { left: 20px; right: 20px; top: auto; bottom: 28px; transform: none; padding-top: 0; gap: 16px; }
   .slide-title, .slide-title.small { font-size: 24px; }
   .slide .btn { font-size: 10px; padding: 10px 20px; white-space: normal; }
-  .hero-arrows { right: 12px; top: auto; bottom: 20px; transform: none; flex-direction: row; }
+  .hero-arrows { right: 12px; top: calc(100px + 56.25vw - 58px); bottom: auto; transform: none; flex-direction: row; }
+  .hero-arrow { width: 44px; height: 44px; }
   .products { padding: 70px 0 40px; }
   .product-grid { grid-template-columns: 1fr; }
   .product-card .content { min-height: 0; padding: 24px 0 50px; }
@@ -360,10 +366,11 @@ h1, h2, h3, h4, .btn, .nav-list > li > a, .sub-menu a, .lang a, .slide-title, .s
 .entry th { background: var(--navy); color: var(--white); }
 .entry a { color: var(--navy); text-decoration: underline; }
 
-.gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px 28.8px; margin-top: 30px; }
-.gallery a { display: block; overflow: hidden; }
-.gallery img { width: 100%; height: 250px; object-fit: cover; transition: transform .6s var(--ease); }
-.gallery a:hover img { transform: scale(1.06); }
+/* Galeri: fotoğraflar kendi oranında, kesilmeden (masonry) */
+.gallery { columns: 3; column-gap: 24px; margin-top: 30px; }
+.gallery a { display: block; margin-bottom: 24px; break-inside: avoid; overflow: hidden; background: #eef0f2; }
+.gallery img { width: 100%; height: auto; transition: opacity .4s; }
+.gallery a:hover img { opacity: .85; }
 
 /* ---------- Kategori ---------- */
 .category { padding: 60px 0 30px; }
@@ -436,8 +443,8 @@ h1, h2, h3, h4, .btn, .nav-list > li > a, .sub-menu a, .lang a, .slide-title, .s
   .title-bar h1 { font-size: 30px; }
   .detail { padding: 50px 0; }
   .feature-img { margin-bottom: 30px; }
-  .gallery { grid-template-columns: 1fr 1fr; gap: 12px; }
-  .gallery img { height: 160px; }
+  .gallery { columns: 2; column-gap: 12px; }
+  .gallery a { margin-bottom: 12px; }
   .category .product-grid { grid-template-columns: 1fr; }
   .info-boxes { grid-template-columns: 1fr; }
   .info-box { border-right: 0; border-bottom: 1px solid #e8e8e9; padding: 45px 25px; }
